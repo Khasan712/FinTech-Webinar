@@ -13,11 +13,19 @@ class RegisterApi(APIView):
         try:
             params = self.request.query_params
             if not params.get('web_id'):
+                serializer = RegisterSerializer(data=self.request.data)
+                if not serializer.is_valid():
+                    return Response(
+                        {
+                            'status': False,
+                            "error": serializer.errors
+                        }, status=status.HTTP_400_BAD_REQUEST
+                    )
+                serializer.save()
                 return Response(
                     {
-                        "status": False,
-                        "error": "Send `web_id` in the params."
-                    }, status=status.HTTP_400_BAD_REQUEST
+                        'status': True
+                    }, status=status.HTTP_200_OK
                 )
             webinar = Webinar.objects.filter(uuid_webinar__uuid=params.get('web_id')).first()
             if not webinar:
