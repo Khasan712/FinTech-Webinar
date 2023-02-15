@@ -17,7 +17,7 @@ class RegisterApi(APIView):
                     {
                         "status": False,
                         "error": "Send `web_id` in the params."
-                    }
+                    }, status=status.HTTP_400_BAD_REQUEST
                 )
             webinar = Webinar.objects.filter(uuid_webinar__uuid=params.get('web_id')).first()
             if not webinar:
@@ -25,7 +25,7 @@ class RegisterApi(APIView):
                     {
                         'status': False,
                         'error': 'Webinar not found or inactive.'
-                    }
+                    }, status=status.HTTP_400_BAD_REQUEST
                 )
             serializer = RegisterSerializer(data=self.request.data)
             if not serializer.is_valid():

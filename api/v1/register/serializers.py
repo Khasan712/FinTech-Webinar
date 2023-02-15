@@ -7,7 +7,7 @@ class RegisterSerializer(serializers.ModelSerializer):
         model = Register
         fields = ('id', 'first_name', 'phone_number')
 
-    def validate(self, attrs):
-        if len(attrs['phone_number']) != 13 or not attrs['phone_number'].startswith('+'):
-            raise serializers.ValidationError('Phone number not valid')
-        return attrs
+    # def validate(self, attrs):
+    #     if len(attrs['phone_number']) > 13 or len(attrs['phone_number']) < :
+    #         raise serializers.ValidationError('Phone number not valid')
+    #     return attrs
