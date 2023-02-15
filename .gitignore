@@ -127,3 +127,9 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# deployment ignore document or folders
+migrations/
+static/
+staticfiles/
+media/
