@@ -48,3 +48,5 @@ class Mobile(Register):
         proxy = True
         verbose_name = 'Mobile'
         verbose_name_plural = 'Mobilchilar'
+
+
