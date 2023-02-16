@@ -1,7 +1,7 @@
 from django.db import models
 
 from api.v1.register.enums import Course
-from api.v1.register.managers import FrontendManager, BackendManager, MobileManager
+from api.v1.register.managers import FrontendManager, BackendManager, MobileManager, WebinarManager
 from api.v1.webinar.models import Webinar
 
 
@@ -16,8 +16,8 @@ class Register(models.Model):
     course = models.CharField(max_length=255, choices=Course.choices(), blank=True, null=True)
 
     class Meta:
-        verbose_name = 'Vebinar'
-        verbose_name_plural = 'Vebinar'
+        verbose_name = 'Hammasi'
+        verbose_name_plural = 'Hammasi'
 
     def __str__(self):
         return f'{self.first_name} - {self.phone_number}'
@@ -50,3 +50,10 @@ class Mobile(Register):
         verbose_name_plural = 'Mobilchilar'
 
 
+class Webinar(Register):
+    objects = WebinarManager()
+
+    class Meta:
+        proxy = True
+        verbose_name = 'Vebinar'
+        verbose_name_plural = 'Vebinar'

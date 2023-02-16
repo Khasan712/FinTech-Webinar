@@ -15,3 +15,7 @@ class MobileManager(manager.Manager):
     def get_queryset(self):
         return super().get_queryset().filter(course="mobile")
 
+
+class WebinarManager(manager.Manager):
+    def get_queryset(self):
+        return super().get_queryset().filter(course="webinar")

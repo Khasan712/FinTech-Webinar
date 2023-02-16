@@ -82,7 +82,9 @@ class RegisterApi(APIView):
                         "error": serializer.errors
                     }, status=status.HTTP_400_BAD_REQUEST
                 )
+            print(course, '1111111111111111111111111111')
             if course:
+                print(course, '2222222222222222222222222222')
                 if course not in ['backend', 'frontend', 'mobile']:
                     return Response(
                         {
@@ -91,7 +93,7 @@ class RegisterApi(APIView):
                         }
                     )
                 serializer.save(course=course)
-            serializer.save()
+            serializer.save(course='webinar')
         except Exception as e:
             return Response(
                 {
