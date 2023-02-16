@@ -58,3 +58,45 @@ class RegisterApi(APIView):
                 }, status=status.HTTP_200_OK
             )
 
+
+class CourseRegisterApi(APIView):
+    def post(self, request):
+        try:
+            data = self.request.data
+            course = data.get('course')
+            first_name = data.get('first_name')
+            phone_number = data.get('phone_number')
+
+            if not first_name or not phone_number or not course:
+                return Response(
+                    {
+                        "status": False,
+                        "error": "Name or Phone not given!"
+                    }, status=status.HTTP_400_BAD_REQUEST
+                )
+            serializer = RegisterSerializer(data=data)
+            if not serializer.is_valid():
+                return Response(
+                    {
+                        'status': False,
+                        "error": serializer.errors
+                    }, status=status.HTTP_400_BAD_REQUEST
+                )
+            serializer.save(course=course)
+        except Exception as e:
+            return Response(
+                {
+                    'status': False,
+                    'error': str(e)
+                }, status=status.HTTP_400_BAD_REQUEST
+            )
+        else:
+            return Response(
+                {
+                    'status': True
+                }, status=status.HTTP_201_CREATED
+            )
+
+
+
+
