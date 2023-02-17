@@ -1,5 +1,5 @@
 from django.db import models
-
+import datetime
 from api.v1.register.enums import Course
 from api.v1.register.managers import FrontendManager, BackendManager, MobileManager, WebinarManager
 from api.v1.webinar.models import Webinar
@@ -20,7 +20,7 @@ class Register(models.Model):
         verbose_name_plural = 'Hammasi'
 
     def __str__(self):
-        return f'{self.first_name} - {self.phone_number}'
+        return f'{self.id} - {self.first_name} - {self.phone_number} - {self.course} - {self.created_at}'
 
 
 class Backend(Register):

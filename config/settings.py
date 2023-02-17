@@ -191,4 +191,5 @@ CORS_ALLOW_HEADERS = [
     "x-csrftoken",
     "x-requested-with",
 ]
-
+IMPORT_EXPORT_USE_TRANSACTIONS = True
+# DATE_INPUT_FORMATS = ('%d-%m-%Y')

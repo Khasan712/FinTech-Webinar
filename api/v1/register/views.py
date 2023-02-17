@@ -74,25 +74,30 @@ class RegisterApi(APIView):
                         "error": "Name or Phone not given!"
                     }, status=status.HTTP_400_BAD_REQUEST
                 )
-            serializer = RegisterSerializer(data=data)
-            if not serializer.is_valid():
-                return Response(
-                    {
-                        'status': False,
-                        "error": serializer.errors
-                    }, status=status.HTTP_400_BAD_REQUEST
-                )
-            if course:
-                if course not in ['backend', 'frontend', 'mobile']:
+
+            check_phone_number = Register.objects.filter(phone_number=phone_number, course=course).first()
+            if not check_phone_number:
+                serializer = RegisterSerializer(data=data)
+                if not serializer.is_valid():
                     return Response(
                         {
-                            "status": False,
-                            "error": "Course not found!!!"
-                        }
+                            'status': False,
+                            "error": serializer.errors
+                        }, status=status.HTTP_400_BAD_REQUEST
                     )
-                serializer.save(course=course)
-            else:
-                serializer.save(course='webinar')
+
+                if course:
+                    if course not in ['backend', 'frontend', 'mobile']:
+                        return Response(
+                            {
+                                "status": False,
+                                "error": "Course not found!!!"
+                            }
+                        )
+
+                    serializer.save(course=course)
+                else:
+                    serializer.save(course='webinar')
         except Exception as e:
             return Response(
                 {
