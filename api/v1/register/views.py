@@ -91,12 +91,8 @@ class RegisterApi(APIView):
                         }
                     )
                 serializer.save(course=course)
-                return Response(
-                    {
-                        'status': True
-                    }, status=status.HTTP_201_CREATED
-                )
-            serializer.save(course='webinar')
+            else:
+                serializer.save(course='webinar')
         except Exception as e:
             return Response(
                 {
