@@ -20,7 +20,7 @@ class Register(models.Model):
         verbose_name_plural = 'Hammasi'
 
     def __str__(self):
-        return f'{self.id} - {self.first_name} - {self.phone_number} - {self.course} - {self.created_at}'
+        return f'ID - {self.id}, Name - {self.first_name}, Tel - {self.phone_number}, Yo\'nalish - {self.course}, Yaratilgan - {self.created_at}'
 
 
 class Backend(Register):
