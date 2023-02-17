@@ -45,6 +45,7 @@ INSTALLED_APPS = [
 INSTALLED_APPS += [
     'corsheaders',
     'rest_framework',
+    'import_export',
 ]
 
 # Created apps
